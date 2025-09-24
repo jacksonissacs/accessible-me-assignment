@@ -6,19 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title itemprop="name">Accessible Me — Jam Box Studios</title>
 
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;500&family=Stick+No+Bills:wght@300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="css/main.css" />
 </head>
 
 <body>
   
   <a class="skip-link" href="#main">Skip to main content</a>
+  <a class="skip-link" href="#primary-nav">Skip to navigation</a>
 
   
   <header class="site-header" role="banner">
-    <div class="container">
+    <div class="container header-inner">
       
       <div class="brand" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
         <a href="/" itemprop="url" aria-label="Jam Box Studios home">
@@ -27,7 +30,7 @@
       </div>
 
       
-      <nav class="main-nav" aria-label="Primary" itemscope itemtype="https://schema.org/SiteNavigationElement">
+      <nav id="primary-nav" class="main-nav" aria-label="Primary" itemscope itemtype="https://schema.org/SiteNavigationElement">
         <ul>
           <li><a href="#" aria-current="page">Home</a></li>
           <li><a href="#">Products</a></li>
@@ -35,16 +38,16 @@
           <li><a href="#">Studio</a></li>
         </ul>
       </nav>
-
-      
-      <figure class="banner-figure">
-        <img src="https://picsum.photos/1200/900" class="banner" role="presentation" />
-      </figure>
     </div>
+
+    
+    <figure class="banner-figure" aria-hidden="true">
+      <img src="https://picsum.photos/1200/900" class="banner" alt="" />
+    </figure>
   </header>
 
-  
-  <main id="main" class="main-content" role="main">
+ 
+  <main id="main" class="main-content" role="main" tabindex="-1">
     <div class="container">
       <h1>Welcome to Jam Box</h1>
 
@@ -52,7 +55,7 @@
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam perferendis expedita sed itaque odit ipsam omnis, eos voluptates magni fugit culpa voluptatibus, inventore eaque, eligendi voluptatum! Voluptate iusto error voluptatibus.</p>
 
       
-      <section class="owner" aria-labelledby="owner-heading" itemscope itemtype="https://schema.org/Organization">
+      <section class="owner" role="region" aria-labelledby="owner-heading" itemscope itemtype="https://schema.org/Organization">
         <h2 id="owner-heading">Meet the Owner</h2>
         <dl>
           <div>
@@ -83,7 +86,7 @@
       </section>
 
       
-      <section class="contact-section" aria-labelledby="contact-heading">
+      <section class="contact-section" role="region" aria-labelledby="contact-heading">
         <h2 id="contact-heading">Contact Us</h2>
         <form action="thanks.html" method="post" aria-describedby="contact-help">
           <p id="contact-help">Fields marked * are required.</p>
@@ -108,7 +111,7 @@
             <textarea id="message" name="message" rows="6" required></textarea>
           </div>
 
-          <button type="submit" class="btn">Send</button>
+          <button type="submit" class="btn">Send Message</button>
         </form>
       </section>
     </div>
@@ -116,7 +119,7 @@
 
   
   <footer class="site-footer" role="contentinfo">
-    <div class="container">
+    <div class="container footer-inner">
       <p>&copy; <time datetime="2025">2025</time> <span>Jam Box Studios</span></p>
       <nav aria-label="Footer">
         <ul>
