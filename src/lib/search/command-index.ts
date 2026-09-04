@@ -99,7 +99,7 @@ export function searchCatalog(
   for (const event of catalog) {
     for (const market of event.relatedMarkets) {
       if (seenMarkets.has(market.id)) continue
-      const hay = `${market.name} ${market.venue} ${event.title}`
+      const hay = `${market.name} ${market.venue} ${event.title} ${event.tags.join(" ")}`
       if (queryTokens.length > 0 && !matches(hay, queryTokens)) continue
       seenMarkets.add(market.id)
       marketHits.push({

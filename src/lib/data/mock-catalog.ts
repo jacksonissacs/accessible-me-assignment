@@ -474,7 +474,7 @@ export const events: IntelligenceEvent[] = [
       { at: "2026-08-30T12:00:00.000Z", probability: 27 },
       { at: "2026-09-04T13:20:00.000Z", probability: 39, note: "Fed + MoF coincidence." },
     ],
-    tags: ["JPY", "carry", "MoF", "G10"],
+    tags: ["JPY", "yen", "carry", "MoF", "G10"],
     region: "Japan / G10",
   },
   {
