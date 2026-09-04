@@ -8,7 +8,6 @@ import {
   ChevronRight,
   CircleDot,
   Database,
-  GitBranch,
   History,
   KeyRound,
   List,
@@ -72,7 +71,7 @@ export function AionWorkspace() {
 
   const navigate = (next: WorkspaceView) => {
     setView(next)
-    mainRef.current?.scrollTo({ top: 0 })
+    mainRef.current?.scrollTo?.({ top: 0 })
   }
 
   const openEvent = (event: PulseEvent) => {
@@ -372,15 +371,15 @@ function PulseScreen({
         ))}
         <article className="aion-pulse-card aion-anomaly">
           <div className="aion-card-meta">
-            <span className="category">Supply chain</span>
+          <span className="category">Economics</span>
             <span className="aion-mono">14:58 EDT</span>
           </div>
           <div className="aion-anomaly-flag">△ Expected reaction missing</div>
-          <h2>TSMC Arizona N2 customer delivery window</h2>
+          <h2>Canadian housing correction by Q2 2027</h2>
           <p>
-            Historically this event moves with export-control surprises in 74%
-            of comparable shocks. No meaningful movement detected 26 minutes
-            after today&apos;s repricing.
+            Historically this market moves with Bank of Canada rate surprises
+            in 78% of comparable shocks. No meaningful movement detected 26
+            minutes after today&apos;s repricing.
           </p>
           <div className="aion-anomaly-interpretations">
             <span>Possible: pricing lag</span>
@@ -565,7 +564,7 @@ function EventScreen({
             <span className="aion-chip-dot" />
             Tier {event.sourceTier} evidence
           </span>
-          <span className="aion-chip">Resolves Sep 17 2026</span>
+          <span className="aion-chip">Resolves Oct 29 2026</span>
         </div>
         <h1>{event.title}</h1>
         <div className="aion-event-figures">
@@ -656,11 +655,11 @@ function EventScreen({
             <Residual explained={event.explained} />
             <div className="aion-inspector-section">Additional signals</div>
             <div className="aion-signal-row">
-              <span>US 2Y yield</span>
-              <span className="aion-down aion-mono">−17 bps</span>
+              <span>Canadian 2Y yield</span>
+              <span className="aion-up aion-mono">+17 bps</span>
             </div>
             <div className="aion-signal-row">
-              <span>USD index</span>
+              <span>CAD / USD</span>
               <span className="aion-down aion-mono">−0.4%</span>
             </div>
             <div className="aion-signal-row">
@@ -678,7 +677,7 @@ function EventScreen({
             <div className="aion-anomaly-flag">△ Expected reaction missing</div>
             <p>
               <b style={{ color: "var(--a-tx-0)", fontWeight: 500 }}>
-                U.S. office refinance conditions
+                Canadian housing correction by Q2 2027
               </b>{" "}
               historically move with this market in 78% of comparable shocks.
               Today: no meaningful movement detected.
@@ -885,9 +884,9 @@ function InspectorBody({ tab, event }: { tab: string; event: PulseEvent }) {
       </div>
       <div className="aion-inspector-section">Entities</div>
       <div className="aion-entity-row">
-        <span className="aion-chip">United States</span>
-        <span className="aion-chip">Labor</span>
-        <span className="aion-chip">Federal Reserve</span>
+        <span className="aion-chip">Canada</span>
+        <span className="aion-chip">CPI</span>
+        <span className="aion-chip">Bank of Canada</span>
       </div>
       <div className="aion-inspector-section">Historical analogues</div>
       <div className="aion-kv">
@@ -1057,17 +1056,17 @@ function ArchiveScreen() {
           <div className="aion-replay-state">
             <div className="aion-panel">
               <h2>Market probabilities then</h2>
-              <Kv label="FOMC September cut" value="58.4%" />
-              <Kv label="GPU export expansion" value="41.0%" />
-              <Kv label="Taiwan lane closure" value="17.2%" />
-              <Kv label="EU AI enforcement" value="49.1%" />
+              <Kv label="BoC October rate cut" value="58.4%" />
+              <Kv label="Frontier model before Dec 1" value="41.0%" />
+              <Kv label="US CPI above 3.0% (Aug)" value="37.2%" />
+              <Kv label="AI regulation before January" value="59.1%" />
             </div>
             <div className="aion-panel" style={{ marginTop: 0 }}>
               <h2>Known at this moment</h2>
               <Kv label="News items observed" value="1,204" />
               <Kv label="Forecasts on record" value="312" />
               <Kv label="Model outputs available" value="7" />
-              <Kv label="Not yet known" value="August payrolls" />
+              <Kv label="Not yet known" value="July CPI · BoC decision" />
             </div>
           </div>
           <h2 style={{ fontSize: 12.5, margin: "0 0 2px" }}>Replay</h2>
@@ -1265,7 +1264,7 @@ function ApiScreen() {
       />
       <div className="aion-panel">
         <h2>Available endpoints</h2>
-        <Kv label="List events" value="GET /api/events" />
+          <Kv label="List events" value="GET /api/events" />
         <Kv label="Filter domain" value="GET /api/events?domain=finance" />
         <Kv label="Get event" value="GET /api/events/:id" />
         <p className="aion-note">
@@ -1386,7 +1385,7 @@ function CommandPalette({
       { section: "Navigate", label: "Pulse", run: () => navigate("pulse"), icon: Activity },
       { section: "Navigate", label: "Ledger", run: () => navigate("ledger"), icon: Database },
       { section: "Navigate", label: "Your record", run: () => navigate("research"), icon: Braces },
-      { section: "Create", label: "Alert if September cut exceeds 70%", run: () => navigate("alerts"), icon: AlarmClock },
+      { section: "Create", label: "Alert if BoC October cut exceeds 70%", run: () => navigate("alerts"), icon: AlarmClock },
     ],
     [navigate, openEvent],
   )
@@ -1443,7 +1442,7 @@ function CallModal({ event, close }: { event: PulseEvent; close: () => void }) {
   return (
     <div className="aion-overlay" onMouseDown={(mouseEvent) => mouseEvent.target === mouseEvent.currentTarget && close()}>
       <div className="aion-call-modal" role="dialog" aria-modal="true" aria-label="Make a call">
-        <h2>Will this event resolve yes?</h2>
+        <h2>Will the Bank of Canada cut in October?</h2>
         <p className="aion-call-sub">
           Blind mode — market consensus, the AION estimate and other forecasters
           are hidden until you lock.
