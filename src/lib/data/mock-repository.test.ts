@@ -1,28 +1,29 @@
 import { describe, expect, it } from "vitest"
 
 import { MockIntelligenceRepository } from "@/lib/data/mock-repository"
+import { CATEGORY_DOMAIN } from "@/lib/domain/categories"
 
 describe("MockIntelligenceRepository", () => {
   const repository = new MockIntelligenceRepository()
 
   it("returns the full book sorted by absolute probability move", () => {
     const events = repository.listEvents()
-    expect(events.length).toBeGreaterThanOrEqual(8)
+    expect(events.length).toBeGreaterThanOrEqual(25)
     expect(events[0]?.id).toBe("evt-gpu-export")
   })
 
   it("filters by domain", () => {
     const finance = repository.listEvents({ domain: "finance" })
-    expect(finance.every((event) => event.domain === "finance")).toBe(true)
+    expect(finance.every((event) => CATEGORY_DOMAIN[event.category] === "finance")).toBe(true)
     expect(finance.some((event) => event.id === "evt-fed-cut")).toBe(true)
   })
 
   it("loads a complete event object", () => {
     const event = repository.getEvent("evt-rare-earth")
     expect(event?.evidence.length).toBeGreaterThan(0)
-    expect(event?.analogues.length).toBeGreaterThan(0)
-    expect(event?.uncertainty.length).toBeGreaterThan(0)
+    expect(event?.unexplainedFactors.length).toBeGreaterThan(0)
     expect(event?.expectationHistory.length).toBeGreaterThan(2)
+    expect(event?.likelyCause).toBeTruthy()
   })
 
   it("returns a feed that only references known events", () => {

@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import {
   createContext,
   useCallback,
@@ -37,8 +37,6 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [watchlist, setWatchlist] = useState<Set<string>>(
     () => new Set(defaultWatchlistIds),
   )
-  const pathname = usePathname()
-
   const toggleCollapsed = useCallback(() => {
     setCollapsed((value) => !value)
   }, [])
@@ -76,10 +74,6 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
   }, [])
-
-  useEffect(() => {
-    setPaletteOpen(false)
-  }, [pathname])
 
   const value = useMemo(
     () => ({

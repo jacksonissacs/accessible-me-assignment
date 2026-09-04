@@ -430,7 +430,7 @@ export const events: AionEvent[] = [
     catalystTime: "21:40:00",
     explained: 66,
     region: "Japan",
-    tags: ["USDJPY", "carry", "MoF"],
+    tags: ["USDJPY", "yen", "carry", "MoF"],
     entities: ["MoF Japan", "USDJPY"],
     relatedEvents: ["evt-fed-cut"],
     evidence: [
