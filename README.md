@@ -22,20 +22,37 @@ This repository is the **Phase 0 foundation**: a local Next.js application over 
 - shadcn/ui
 - Vitest + Testing Library
 
+## Routes
+
+| Path | Surface |
+| --- | --- |
+| `/` | Intelligence / Pulse |
+| `/events` | Event book |
+| `/events/[id]` | Event intelligence |
+| `/markets` | Linked markets |
+| `/signals` | Cross-market signals |
+| `/agents` | Forecasters and models |
+| `/watchlists` | Followed events |
+| `/research` | Personal forecast record |
+| `/archive` | Point-in-time reconstruction |
+| `/relations` | Relationship graph |
+| `/alerts` | Threshold monitors |
+| `/settings` | Workspace preferences |
+
 ## Workspace
 
-The root application reproduces the supplied AION product reference as an
-interactive React workspace:
+The application uses the AION reference visual language across routed pages:
 
-- **Pulse** — expectation moves, source quality, attribution and unexplained residuals
-- **Event** — probability chart, evidence timeline, attribution and source inspector
-- **Watchlist** — followed institutions, entities and event classes
-- **Ledger** — forecaster records and model rankings
-- **Archive** — interactive point-in-time reconstruction
-- **Relations** — measured relationship graph with edge inspector
-- **Research** — calibration, category scores and forecast history
-- **Make a call** — blind prediction entry and immutable reveal flow
-- `⌘K` / `Ctrl+K` — ask, search and navigate command palette
+- **Pulse** — expectation moves, category filters, search, sort, watchlist
+- **Event intelligence** — what changed, when, significance, cause, evidence, uncertainty, markets, analogues, prior beliefs
+- **Events / Markets / Signals** — reusable rows, cards, and signal tiles
+- **Agents** — institution and model records
+- **Watchlists** — local follow/unfollow
+- **Archive / Relations / Research** — reference screens, now addressable by URL
+- **Make a call** — blind prediction entry and immutable reveal
+- `⌘K` / `Ctrl+K` — search and navigate
+
+The seeded book contains 32 events across AI, technology, economics, geopolitics, companies, regulation, financial markets, energy, crypto, and science.
 
 ## Setup
 
@@ -62,8 +79,6 @@ npm start         # production server after build
 
 ### Internal API
 
-The UI reads the in-process repository. These routes exist so later clients can share the same contract:
-
 - `GET /api/events`
 - `GET /api/events?domain=finance`
 - `GET /api/events/:id`
@@ -72,11 +87,9 @@ Domains: `technology`, `finance`, `geopolitics`, `supply_chain`.
 
 ## Architecture in brief
 
-Domain types and scoring live in `src/lib/domain`. The `IntelligenceRepository` port in `src/lib/data/repository.ts` is the only way surfaces load data. Today's adapter is `MockIntelligenceRepository`. Swap that adapter — not the UI — when persistence or ingest arrives.
+UI components live under `src/components/{layout,sidebar,header,events,markets,intelligence,common,screens}`. Event types are in `src/types`. The seeded catalog is `src/data/events.ts`.
 
-The current relationship graph is a **visual prototype**. Its evidence language
-and interaction contract are production-minded; a persisted graph engine is not
-part of this phase.
+The `IntelligenceRepository` port in `src/lib/data/repository.ts` remains the swap point for a later store. This revision does not add a fake backend.
 
 ## What is intentionally missing
 
@@ -89,4 +102,4 @@ See the [roadmap](docs/roadmap.md) for the order those appear.
 
 ## Tests
 
-Tests cover scoring, the mock repository, command search, formatters, and the probability card. They run without a browser or network.
+Tests cover scoring, the catalog helpers, the mock repository, command search, the application shell, event cards, and the event intelligence view.

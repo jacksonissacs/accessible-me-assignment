@@ -90,13 +90,21 @@ The App Router pages currently read the repository in-process (no extra hop, no 
 
 ```
 AppShell
-├── TopBar (clock, live mark, command trigger)
-├── Sidebar / mobile Sheet (domains, routes)
-├── CommandPalette (cmdk)
-└── page
-    ├── /            ProbabilityStrip + EventFeed
-    ├── /events/[id] EventDetail + EvidencePanel + local graph
-    └── /graph       RelationshipGraph (catalog topology, visual placeholder)
+├── Sidebar (routed product areas)
+├── TopBar (crumbs + Ask AION)
+├── CommandPalette + CallModal
+└── pages
+    ├── /                Pulse / Intelligence
+    ├── /events          Event book
+    ├── /events/[id]     Event intelligence
+    ├── /markets         Linked markets
+    ├── /signals         Signal cards
+    ├── /agents          Forecaster ledger
+    ├── /watchlists      Local follow list
+    ├── /research        Personal record
+    ├── /archive         Point-in-time
+    ├── /relations       Relationship graph
+    └── /settings        Preferences
 ```
 
 The graph is **intentionally a placeholder**: SVG layout from catalog topology, not a production graph engine. The data is real enough to navigate; the layout algorithm is not the product yet.

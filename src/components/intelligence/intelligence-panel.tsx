@@ -1,0 +1,83 @@
+import { Kv } from "@/components/common/kv"
+import type { AionEvent } from "@/types/event"
+
+export function IntelligencePanel({
+  event,
+  tab,
+}: {
+  event: AionEvent
+  tab: "Source" | "Evidence" | "Attribution" | "Analogues"
+}) {
+  if (tab === "Evidence") {
+    return (
+      <div className="aion-inspector-body">
+        <div className="aion-inspector-title">Supporting and contradictory evidence</div>
+        {event.evidence.map((item) => (
+          <div key={item.id} className="aion-evidence-block">
+            <div className="aion-inspector-section">{item.name}</div>
+            <p>{item.summary}</p>
+            <Kv label="Stance" value={item.stance} />
+            <Kv label="Reliability" value={`${Math.round(item.reliability * 100)}%`} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  if (tab === "Attribution") {
+    return (
+      <div className="aion-inspector-body">
+        <div className="aion-inspector-title">AION attribution</div>
+        <Kv label="Likely cause" value={event.likelyCause} />
+        <Kv label="Coverage of move" value={`${event.explained}%`} />
+        <Kv label="Identification" value={event.confidence} />
+        <div className="aion-inspector-section">Unexplained</div>
+        {event.unexplainedFactors.map((factor) => (
+          <p key={factor}>{factor}</p>
+        ))}
+      </div>
+    )
+  }
+
+  if (tab === "Analogues") {
+    return (
+      <div className="aion-inspector-body">
+        <div className="aion-inspector-title">Comparable expectation shocks</div>
+        {event.analogues.length === 0 ? (
+          <p>No scored analogues for this event yet.</p>
+        ) : (
+          event.analogues.map((analogue) => (
+            <div key={analogue.id} className="aion-evidence-block">
+              <div className="aion-inspector-section">
+                {analogue.title} · {analogue.year}
+              </div>
+              <Kv label="Similarity" value={`${Math.round(analogue.similarity * 100)}%`} />
+              <p>{analogue.outcome}</p>
+              <p className="aion-note">{analogue.lesson}</p>
+            </div>
+          ))
+        )}
+      </div>
+    )
+  }
+
+  const source = event.sources[0]
+  return (
+    <div className="aion-inspector-body">
+      <div className="aion-inspector-title">{source?.name ?? event.catalyst}</div>
+      <Kv label="Published" value={event.catalystTime} />
+      <Kv label="First observed by AION" value={event.displayTime} />
+      <Kv label="Source reliability" value={`Tier ${event.sourceTier}`} />
+      <Kv label="Historical relevance" value={event.confidence} />
+      <div className="aion-inspector-section">Entities</div>
+      <div className="aion-entity-row">
+        {event.entities.map((entity) => (
+          <span className="aion-chip" key={entity}>
+            {entity}
+          </span>
+        ))}
+      </div>
+      {source ? <p>{source.summary}</p> : null}
+    </div>
+  )
+}

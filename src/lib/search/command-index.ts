@@ -1,48 +1,21 @@
-import { DOMAIN_LABEL, type IntelligenceEvent, type SearchHit } from "@/lib/domain/types"
+import { CATEGORY_DOMAIN } from "@/lib/domain/categories"
+import { DOMAIN_LABEL, type SearchHit } from "@/lib/domain/types"
+import type { AionEvent } from "@/types/event"
 
 const STATIC_COMMANDS: SearchHit[] = [
-  {
-    id: "cmd-feed",
-    kind: "command",
-    title: "Open intelligence feed",
-    subtitle: "Dashboard",
-    href: "/",
-  },
-  {
-    id: "cmd-graph",
-    kind: "command",
-    title: "Open relationship graph",
-    subtitle: "Graph",
-    href: "/graph",
-  },
-  {
-    id: "cmd-tech",
-    kind: "command",
-    title: "Filter technology",
-    subtitle: "Domain",
-    href: "/?domain=technology",
-  },
-  {
-    id: "cmd-fin",
-    kind: "command",
-    title: "Filter finance",
-    subtitle: "Domain",
-    href: "/?domain=finance",
-  },
-  {
-    id: "cmd-geo",
-    kind: "command",
-    title: "Filter geopolitics",
-    subtitle: "Domain",
-    href: "/?domain=geopolitics",
-  },
-  {
-    id: "cmd-sup",
-    kind: "command",
-    title: "Filter supply chain",
-    subtitle: "Domain",
-    href: "/?domain=supply_chain",
-  },
+  { id: "cmd-feed", kind: "command", title: "Open intelligence feed", subtitle: "Dashboard", href: "/" },
+  { id: "cmd-events", kind: "command", title: "Open events", subtitle: "Events", href: "/events" },
+  { id: "cmd-markets", kind: "command", title: "Open markets", subtitle: "Markets", href: "/markets" },
+  { id: "cmd-signals", kind: "command", title: "Open signals", subtitle: "Signals", href: "/signals" },
+  { id: "cmd-agents", kind: "command", title: "Open agents", subtitle: "Agents", href: "/agents" },
+  { id: "cmd-watch", kind: "command", title: "Open watchlists", subtitle: "Watchlists", href: "/watchlists" },
+  { id: "cmd-research", kind: "command", title: "Open research", subtitle: "Research", href: "/research" },
+  { id: "cmd-graph", kind: "command", title: "Open relationship graph", subtitle: "Relations", href: "/relations" },
+  { id: "cmd-settings", kind: "command", title: "Open settings", subtitle: "Settings", href: "/settings" },
+  { id: "cmd-tech", kind: "command", title: "Filter technology", subtitle: "Domain", href: "/events?category=Technology" },
+  { id: "cmd-fin", kind: "command", title: "Filter finance", subtitle: "Domain", href: "/events?category=Markets" },
+  { id: "cmd-geo", kind: "command", title: "Filter geopolitics", subtitle: "Domain", href: "/events?category=Geopolitics" },
+  { id: "cmd-ai", kind: "command", title: "Filter AI", subtitle: "Category", href: "/events?category=AI" },
 ]
 
 function normalize(value: string): string {
@@ -60,7 +33,7 @@ function matches(haystack: string, queryTokens: string[]): boolean {
 
 export function searchCatalog(
   query: string,
-  catalog: IntelligenceEvent[],
+  catalog: AionEvent[],
 ): SearchHit[] {
   const queryTokens = tokens(query)
   const commands = STATIC_COMMANDS.filter((command) =>
@@ -78,8 +51,8 @@ export function searchCatalog(
               event.title,
               event.question,
               event.region,
-              event.domain,
-              DOMAIN_LABEL[event.domain],
+              event.category,
+              DOMAIN_LABEL[CATEGORY_DOMAIN[event.category]],
               ...event.tags,
             ].join(" "),
             queryTokens,
@@ -89,9 +62,9 @@ export function searchCatalog(
       id: event.id,
       kind: "event" as const,
       title: event.title,
-      subtitle: `${DOMAIN_LABEL[event.domain]} · ${event.currentProbability.toFixed(1)}%`,
+      subtitle: `${event.category} · ${event.probability.toFixed(1)}%`,
       href: `/events/${event.id}`,
-      domain: event.domain,
+      domain: CATEGORY_DOMAIN[event.category],
     }))
 
   const marketHits: SearchHit[] = []

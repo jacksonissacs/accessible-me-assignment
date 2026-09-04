@@ -1,27 +1,17 @@
-import {
-  events,
-  feed,
-  graphEdges,
-  graphNodes,
-} from "@/lib/data/mock-catalog"
+import { events } from "@/data/events"
+import { feed, graphEdges, graphNodes } from "@/lib/data/mock-catalog"
 import type { IntelligenceRepository } from "@/lib/data/repository"
+import { domainCategories } from "@/lib/domain/categories"
 import { probabilityDelta } from "@/lib/domain/scoring"
-import type {
-  Domain,
-  EventFilter,
-  IntelligenceEvent,
-  IntelligenceItem,
-  RelationshipGraph,
-  SearchHit,
-} from "@/lib/domain/types"
+import type { Domain, EventFilter, RelationshipGraph, SearchHit } from "@/lib/domain/types"
 import { searchCatalog } from "@/lib/search/command-index"
+import type { AionEvent } from "@/types/event"
 
-function matchesFilter(
-  event: IntelligenceEvent,
-  filter?: EventFilter,
-): boolean {
-  if (filter?.domain && filter.domain !== "all" && event.domain !== filter.domain) {
-    return false
+function matchesFilter(event: AionEvent, filter?: EventFilter): boolean {
+  if (filter?.domain && filter.domain !== "all") {
+    if (!domainCategories(filter.domain).includes(event.category)) {
+      return false
+    }
   }
   if (filter?.query) {
     const q = filter.query.trim().toLowerCase()
@@ -29,8 +19,9 @@ function matchesFilter(
     const haystack = [
       event.title,
       event.question,
-      event.narrative,
+      event.summary,
       event.region,
+      event.category,
       ...event.tags,
     ]
       .join(" ")
@@ -41,26 +32,22 @@ function matchesFilter(
 }
 
 export class MockIntelligenceRepository implements IntelligenceRepository {
-  listEvents(filter?: EventFilter): IntelligenceEvent[] {
+  listEvents(filter?: EventFilter): AionEvent[] {
     return events
       .filter((event) => matchesFilter(event, filter))
       .slice()
       .sort((a, b) => {
-        const aMove = Math.abs(
-          probabilityDelta(a.currentProbability, a.previousProbability),
-        )
-        const bMove = Math.abs(
-          probabilityDelta(b.currentProbability, b.previousProbability),
-        )
-        return bMove - aMove || b.updatedAt.localeCompare(a.updatedAt)
+        const aMove = Math.abs(probabilityDelta(a.probability, a.previousProbability))
+        const bMove = Math.abs(probabilityDelta(b.probability, b.previousProbability))
+        return bMove - aMove || b.timestamp.localeCompare(a.timestamp)
       })
   }
 
-  getEvent(id: string): IntelligenceEvent | undefined {
+  getEvent(id: string): AionEvent | undefined {
     return events.find((event) => event.id === id)
   }
 
-  listFeed(filter?: EventFilter): IntelligenceItem[] {
+  listFeed(filter?: EventFilter) {
     const allowed = new Set(this.listEvents(filter).map((event) => event.id))
     return feed
       .filter((item) => allowed.has(item.eventId))
@@ -69,9 +56,12 @@ export class MockIntelligenceRepository implements IntelligenceRepository {
   }
 
   getGraph(): RelationshipGraph {
+    const known = new Set(events.map((event) => event.id))
     return {
       nodes: graphNodes,
-      edges: graphEdges,
+      edges: graphEdges.filter(
+        (edge) => known.has(edge.source) && known.has(edge.target),
+      ),
     }
   }
 

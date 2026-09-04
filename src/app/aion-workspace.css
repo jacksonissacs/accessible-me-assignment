@@ -66,6 +66,10 @@
   gap: 9px;
   margin-bottom: 16px;
   padding: 6px 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
 }
 
 .aion-logo-mark {
@@ -93,6 +97,7 @@
   font-size: 13px;
   padding: 6px 8px;
   text-align: left;
+  text-decoration: none;
   transition: background 120ms, color 120ms;
   white-space: nowrap;
 }
@@ -1272,6 +1277,185 @@
   outline-offset: 1px;
 }
 
+.aion-event-question {
+  max-width: 46rem;
+  margin: -6px 0 16px;
+  color: var(--a-tx-1);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.aion-qa-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.aion-qa-card {
+  border: 1px solid var(--a-border-0);
+  border-radius: 9px;
+  background: var(--a-bg-1);
+  padding: 14px 16px;
+}
+
+.aion-qa-card p {
+  margin: 4px 0 0;
+  color: var(--a-tx-0);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.aion-event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aion-event-list-head {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) 110px 110px 140px 60px 90px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px 8px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-event-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--a-border-0);
+  border-radius: 9px;
+  background: var(--a-bg-1);
+  padding: 4px 8px 4px 12px;
+}
+
+.aion-event-row-main {
+  flex: 1;
+}
+
+.aion-event-row-main {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) 110px 110px 140px 60px;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.aion-event-row:hover {
+  border-color: var(--a-border-1);
+  background: var(--a-bg-2);
+}
+
+.aion-event-row-meta {
+  color: var(--a-tx-2);
+  font-size: 12px;
+}
+
+.aion-signal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.aion-signal-card {
+  border: 1px solid var(--a-border-0);
+  border-radius: 9px;
+  background: var(--a-bg-1);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 16px 18px;
+  text-align: left;
+  transition: background 120ms, border-color 120ms;
+}
+
+.aion-signal-card:hover {
+  border-color: var(--a-border-1);
+  background: var(--a-bg-2);
+}
+
+.aion-signal-card h2 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.aion-signal-card p {
+  margin: 0 0 10px;
+  color: var(--a-tx-2);
+  font-size: 12px;
+}
+
+.aion-related-link {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--a-border-0);
+  color: var(--a-tx-0);
+  text-decoration: none;
+}
+
+.aion-related-link:hover {
+  color: var(--a-accent);
+}
+
+.aion-history-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  color: var(--a-tx-1);
+  font-size: 12px;
+}
+
+.aion-evidence-block {
+  margin-bottom: 16px;
+}
+
+.aion-evidence-block p {
+  margin: 6px 0 8px;
+  color: var(--a-tx-1);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.aion-watch-row-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.aion-watch-row-wrap .aion-watch-row {
+  width: 100%;
+}
+
+.aion-settings-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 16px;
+  color: var(--a-tx-1);
+  font-size: 13px;
+}
+
+a.aion-button {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 @media (max-width: 1080px) {
   .aion-event-layout,
   .aion-relations-layout {
@@ -1284,7 +1468,8 @@
 
   .aion-research-grid,
   .aion-ledger-grid,
-  .aion-replay-state {
+  .aion-replay-state,
+  .aion-qa-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1343,8 +1528,17 @@
   }
 
   .aion-watch-head,
-  .aion-watch-row {
+  .aion-watch-row,
+  .aion-event-list-head,
+  .aion-event-row,
+  .aion-event-row-main {
     grid-template-columns: 1.4fr 1fr 1fr;
+  }
+
+  .aion-event-list-head > :nth-child(4),
+  .aion-event-list-head > :nth-child(5),
+  .aion-event-row-meta {
+    display: none;
   }
 
   .aion-watch-head > :nth-child(4),
