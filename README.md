@@ -22,12 +22,20 @@ This repository is the **Phase 0 foundation**: a local Next.js application over 
 - shadcn/ui
 - Vitest + Testing Library
 
-## Surfaces
+## Workspace
 
-- `/` — intelligence feed and probability-change cards
-- `/events/[id]` — event reconstruction, evidence, analogues, local graph
-- `/graph` — relationship-graph placeholder for the full book
-- `⌘K` / `Ctrl+K` — command palette
+The root application reproduces the supplied AION product reference as an
+interactive React workspace:
+
+- **Pulse** — expectation moves, source quality, attribution and unexplained residuals
+- **Event** — probability chart, evidence timeline, attribution and source inspector
+- **Watchlist** — followed institutions, entities and event classes
+- **Ledger** — forecaster records and model rankings
+- **Archive** — interactive point-in-time reconstruction
+- **Relations** — measured relationship graph with edge inspector
+- **Research** — calibration, category scores and forecast history
+- **Make a call** — blind prediction entry and immutable reveal flow
+- `⌘K` / `Ctrl+K` — ask, search and navigate command palette
 
 ## Setup
 
@@ -66,7 +74,9 @@ Domains: `technology`, `finance`, `geopolitics`, `supply_chain`.
 
 Domain types and scoring live in `src/lib/domain`. The `IntelligenceRepository` port in `src/lib/data/repository.ts` is the only way surfaces load data. Today's adapter is `MockIntelligenceRepository`. Swap that adapter — not the UI — when persistence or ingest arrives.
 
-The relationship graph is a **visual placeholder**. The topology is real catalog data; the layout is not a production graph engine.
+The current relationship graph is a **visual prototype**. Its evidence language
+and interaction contract are production-minded; a persisted graph engine is not
+part of this phase.
 
 ## What is intentionally missing
 

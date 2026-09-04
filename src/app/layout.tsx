@@ -1,19 +1,19 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Suspense, type ReactNode } from "react"
-
-import { AppShell } from "@/components/shell/app-shell"
+import { IBM_Plex_Mono, Inter } from "next/font/google"
+import type { ReactNode } from "react"
 
 import "./globals.css"
+import "./aion-workspace.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 })
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 })
 
 export const metadata: Metadata = {
@@ -33,12 +33,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`dark ${inter.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <Suspense fallback={<div className="min-h-screen bg-background" />}>
-          <AppShell>{children}</AppShell>
-        </Suspense>
+        {children}
       </body>
     </html>
   )

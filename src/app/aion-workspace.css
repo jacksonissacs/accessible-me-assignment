@@ -1,0 +1,1383 @@
+.aion-app {
+  --a-bg-0: #0c0e11;
+  --a-bg-1: #111418;
+  --a-bg-2: #161a1f;
+  --a-bg-3: #1c2127;
+  --a-border-0: rgba(255, 255, 255, 0.055);
+  --a-border-1: rgba(255, 255, 255, 0.09);
+  --a-border-focus: rgba(129, 148, 255, 0.55);
+  --a-tx-0: #e7e9ec;
+  --a-tx-1: #9ba3ad;
+  --a-tx-2: #5e6670;
+  --a-accent: #8194ff;
+  --a-accent-dim: rgba(129, 148, 255, 0.13);
+  --a-accent-line: rgba(129, 148, 255, 0.35);
+  --a-up: #6fae8f;
+  --a-up-dim: rgba(111, 174, 143, 0.12);
+  --a-down: #c08383;
+  --a-down-dim: rgba(192, 131, 131, 0.12);
+  --a-warn: #c9a96a;
+  --a-sidebar: 212px;
+  --a-inspector: 316px;
+  --a-topbar: 44px;
+  display: grid;
+  grid-template-columns: var(--a-sidebar) minmax(0, 1fr);
+  grid-template-rows: var(--a-topbar) minmax(0, 1fr);
+  height: 100vh;
+  overflow: hidden;
+  background: var(--a-bg-0);
+  color: var(--a-tx-0);
+  font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  letter-spacing: 0.005em;
+}
+
+.aion-app[data-collapsed="true"] {
+  --a-sidebar: 52px;
+}
+
+.aion-app * {
+  box-sizing: border-box;
+}
+
+.aion-mono {
+  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.01em;
+}
+
+.aion-sidebar {
+  grid-row: 1 / 3;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+  border-right: 1px solid var(--a-border-0);
+  background: var(--a-bg-0);
+  padding: 12px 8px;
+  overflow: hidden;
+}
+
+.aion-logo {
+  display: flex;
+  height: 34px;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 16px;
+  padding: 6px 8px;
+}
+
+.aion-logo-mark {
+  flex: none;
+}
+
+.aion-logo-word {
+  font-size: 13px;
+  font-weight: 550;
+  letter-spacing: 0.22em;
+}
+
+.aion-nav-item,
+.aion-collapse {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--a-tx-1);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 8px;
+  text-align: left;
+  transition: background 120ms, color 120ms;
+  white-space: nowrap;
+}
+
+.aion-nav-item:hover,
+.aion-collapse:hover {
+  background: var(--a-bg-2);
+  color: var(--a-tx-0);
+}
+
+.aion-nav-item[data-active="true"] {
+  background: var(--a-bg-2);
+  color: var(--a-tx-0);
+}
+
+.aion-nav-icon {
+  display: grid;
+  width: 15px;
+  height: 15px;
+  flex: none;
+  place-items: center;
+  color: var(--a-tx-2);
+}
+
+.aion-nav-item[data-active="true"] .aion-nav-icon {
+  color: var(--a-accent);
+}
+
+.aion-nav-section {
+  color: var(--a-tx-2);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  padding: 14px 8px 4px;
+}
+
+.aion-sidebar-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+  border-top: 1px solid var(--a-border-0);
+  padding-top: 8px;
+}
+
+.aion-collapse {
+  color: var(--a-tx-2);
+  font-size: 11px;
+  margin-top: 4px;
+  padding: 5px 8px;
+}
+
+.aion-app[data-collapsed="true"] .aion-nav-label,
+.aion-app[data-collapsed="true"] .aion-logo-word,
+.aion-app[data-collapsed="true"] .aion-nav-section {
+  display: none;
+}
+
+.aion-topbar {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--a-border-0);
+  background: var(--a-bg-0);
+  padding: 0 16px;
+}
+
+.aion-crumb {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+  color: var(--a-tx-2);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.aion-crumb b {
+  overflow: hidden;
+  color: var(--a-tx-1);
+  font-weight: 500;
+  text-overflow: ellipsis;
+}
+
+.aion-ask {
+  display: flex;
+  min-width: 260px;
+  align-items: center;
+  gap: 9px;
+  margin-left: auto;
+  border: 1px solid var(--a-border-0);
+  border-radius: 6px;
+  background: var(--a-bg-1);
+  color: var(--a-tx-2);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12.5px;
+  padding: 5px 10px;
+}
+
+.aion-ask:hover {
+  border-color: var(--a-border-1);
+  color: var(--a-tx-1);
+}
+
+.aion-kbd {
+  margin-left: auto;
+  border: 1px solid var(--a-border-0);
+  border-radius: 3px;
+  background: var(--a-bg-0);
+  color: var(--a-tx-2);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 10.5px;
+  padding: 1px 5px;
+}
+
+.aion-main {
+  min-width: 0;
+  overflow-y: auto;
+  background: var(--a-bg-0);
+}
+
+.aion-screen {
+  max-width: 1180px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 32px 32px 80px;
+}
+
+.aion-screen-head {
+  margin-bottom: 24px;
+}
+
+.aion-screen-head h1 {
+  margin: 0;
+  color: var(--a-tx-0);
+  font-size: 19px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+}
+
+.aion-screen-head p {
+  margin: 5px 0 0;
+  color: var(--a-tx-1);
+  font-size: 13px;
+}
+
+.aion-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.aion-filter,
+.aion-tab,
+.aion-button {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--a-tx-1);
+  cursor: pointer;
+  font: inherit;
+  transition: background 120ms, border-color 120ms, color 120ms;
+}
+
+.aion-filter {
+  font-size: 12px;
+  padding: 4.5px 12px;
+}
+
+.aion-filter:hover,
+.aion-filter[data-active="true"] {
+  background: var(--a-bg-2);
+  color: var(--a-tx-0);
+}
+
+.aion-filter[data-active="true"] {
+  border-color: var(--a-border-0);
+}
+
+.aion-filter-divider {
+  width: 1px;
+  margin: 4px;
+  background: var(--a-border-0);
+}
+
+.aion-pulse-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aion-pulse-card,
+.aion-panel,
+.aion-stat,
+.aion-ledger-card,
+.aion-watch-row,
+.aion-graph {
+  border: 1px solid var(--a-border-0);
+  border-radius: 9px;
+  background: var(--a-bg-1);
+}
+
+.aion-pulse-card {
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: background 120ms, border-color 120ms;
+}
+
+.aion-pulse-card:hover {
+  border-color: var(--a-border-1);
+  background: var(--a-bg-2);
+}
+
+.aion-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-card-meta .category {
+  color: var(--a-tx-1);
+  letter-spacing: 0.06em;
+}
+
+.aion-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--a-border-0);
+  border-radius: 999px;
+  background: var(--a-bg-1);
+  color: var(--a-tx-1);
+  font-size: 11px;
+  padding: 2.5px 9px;
+}
+
+.aion-chip-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--a-up);
+}
+
+.aion-chip[data-tier="2"] .aion-chip-dot {
+  background: var(--a-warn);
+}
+
+.aion-pulse-card h2 {
+  margin: 0 0 10px;
+  color: var(--a-tx-0);
+  font-size: 14.5px;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+}
+
+.aion-card-move {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.aion-card-from {
+  color: var(--a-tx-2);
+  font-size: 15px;
+}
+
+.aion-card-to {
+  color: var(--a-tx-0);
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.aion-card-arrow {
+  margin: 0 6px;
+  color: var(--a-tx-2);
+}
+
+.aion-card-stats {
+  display: flex;
+  gap: 18px;
+  margin-left: 18px;
+  color: var(--a-tx-2);
+  font-size: 11.5px;
+}
+
+.aion-card-stats b {
+  color: var(--a-tx-1);
+  font-weight: 500;
+}
+
+.aion-up {
+  color: var(--a-up) !important;
+}
+
+.aion-down {
+  color: var(--a-down) !important;
+}
+
+.aion-card-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 24px;
+  align-items: start;
+}
+
+.aion-card-cause {
+  color: var(--a-tx-1);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.aion-label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-residual {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.aion-residual-track {
+  display: flex;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--a-bg-3);
+}
+
+.aion-residual-fill {
+  border-radius: 2px 0 0 2px;
+  background: var(--a-accent);
+  opacity: 0.75;
+}
+
+.aion-residual-unknown {
+  background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.14) 0 3px, transparent 3px 6px);
+}
+
+.aion-residual-legend {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-card-confidence {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 11.5px;
+}
+
+.aion-card-confidence div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--a-tx-2);
+}
+
+.aion-card-confidence span:last-child {
+  color: var(--a-tx-1);
+}
+
+.aion-card-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 14px;
+  border-top: 1px solid var(--a-border-0);
+  padding-top: 12px;
+}
+
+.aion-button {
+  border-color: var(--a-border-0);
+  background: var(--a-bg-1);
+  font-size: 12.5px;
+  padding: 6px 13px;
+}
+
+.aion-button:hover {
+  border-color: var(--a-border-1);
+  background: var(--a-bg-2);
+  color: var(--a-tx-0);
+}
+
+.aion-button[data-quiet="true"] {
+  border-color: transparent;
+  background: transparent;
+  color: var(--a-tx-2);
+}
+
+.aion-button[data-primary="true"] {
+  border-color: var(--a-accent-line);
+  background: var(--a-accent-dim);
+  color: var(--a-accent);
+}
+
+.aion-anomaly {
+  border-left: 2px solid var(--a-warn);
+  background: linear-gradient(90deg, rgba(201, 169, 106, 0.05), transparent 40%), var(--a-bg-1);
+  cursor: default;
+}
+
+.aion-anomaly-flag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  color: var(--a-warn);
+  font-size: 11px;
+}
+
+.aion-anomaly p {
+  margin: 0;
+  color: var(--a-tx-1);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.aion-anomaly-interpretations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  color: var(--a-tx-2);
+  font-size: 12px;
+}
+
+.aion-event-head {
+  margin-bottom: 24px;
+}
+
+.aion-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-event-head h1 {
+  margin: 0 0 14px;
+  color: var(--a-tx-0);
+  font-size: 20px;
+  font-weight: 550;
+  letter-spacing: -0.012em;
+}
+
+.aion-event-figures {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 36px;
+}
+
+.aion-event-figure-label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-event-figure {
+  color: var(--a-tx-0);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.aion-event-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.aion-event-layout,
+.aion-relations-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--a-inspector);
+  gap: 24px;
+  align-items: start;
+}
+
+.aion-panel {
+  padding: 16px 24px;
+}
+
+.aion-panel + .aion-panel {
+  margin-top: 16px;
+}
+
+.aion-panel h2,
+.aion-panel h3 {
+  margin: 0 0 16px;
+  font-size: 12.5px;
+  font-weight: 550;
+}
+
+.aion-chart-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.aion-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.aion-tabs[data-ranges="true"] {
+  margin-left: auto;
+}
+
+.aion-tab {
+  border-radius: 3px;
+  color: var(--a-tx-2);
+  font-size: 11.5px;
+  padding: 3px 10px;
+}
+
+.aion-tab:hover {
+  color: var(--a-tx-1);
+}
+
+.aion-tab[data-active="true"] {
+  background: var(--a-bg-3);
+  color: var(--a-tx-0);
+}
+
+.aion-chart {
+  display: block;
+  width: 100%;
+  height: 220px;
+}
+
+.aion-axis {
+  fill: var(--a-tx-2);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 9.5px;
+}
+
+.aion-timeline {
+  position: relative;
+  padding-left: 22px;
+}
+
+.aion-timeline::before {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 5px;
+  width: 1px;
+  background: var(--a-border-1);
+  content: "";
+}
+
+.aion-timeline-item {
+  position: relative;
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 7px 10px;
+  text-align: left;
+}
+
+.aion-timeline-item:hover,
+.aion-timeline-item[data-active="true"] {
+  background: var(--a-bg-2);
+}
+
+.aion-timeline-item::before {
+  position: absolute;
+  top: 13px;
+  left: -20.5px;
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--a-tx-2);
+  border-radius: 50%;
+  background: var(--a-bg-0);
+  content: "";
+}
+
+.aion-timeline-item[data-active="true"]::before {
+  border-color: var(--a-accent);
+  background: var(--a-accent);
+}
+
+.aion-timeline-time {
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-timeline-item[data-active="true"] .aion-timeline-time {
+  color: var(--a-accent);
+}
+
+.aion-timeline-text {
+  margin-top: 1px;
+  color: var(--a-tx-1);
+  font-size: 12.5px;
+}
+
+.aion-timeline-item[data-active="true"] .aion-timeline-text {
+  color: var(--a-tx-0);
+}
+
+.aion-inspector {
+  position: sticky;
+  top: 0;
+}
+
+.aion-inspector-tabs {
+  display: flex;
+  gap: 2px;
+  border: 1px solid var(--a-border-0);
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+  background: var(--a-bg-1);
+  padding: 0 8px;
+}
+
+.aion-inspector-tabs .aion-tab {
+  margin-bottom: -1px;
+  border-bottom: 1.5px solid transparent;
+  border-radius: 0;
+  padding: 9px 10px;
+}
+
+.aion-inspector-tabs .aion-tab[data-active="true"] {
+  border-bottom-color: var(--a-accent);
+  background: transparent;
+}
+
+.aion-inspector-body {
+  border: 1px solid var(--a-border-0);
+  border-radius: 0 0 9px 9px;
+  background: var(--a-bg-1);
+  padding: 16px;
+}
+
+.aion-inspector-title {
+  margin-bottom: 10px;
+  font-size: 13.5px;
+  font-weight: 550;
+}
+
+.aion-kv,
+.aion-signal-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--a-border-0);
+  padding: 7px 0;
+  font-size: 12.5px;
+}
+
+.aion-kv span:first-child,
+.aion-signal-row span:first-child {
+  color: var(--a-tx-2);
+}
+
+.aion-kv span:last-child {
+  color: var(--a-tx-0);
+  text-align: right;
+}
+
+.aion-inspector-section {
+  margin: 14px 0 4px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-entity-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 0;
+}
+
+.aion-attribution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+  margin-bottom: 16px;
+}
+
+.aion-attribution-value {
+  color: var(--a-tx-0);
+  font-size: 13.5px;
+}
+
+.aion-note {
+  margin: 16px 0 0;
+  border-top: 1px solid var(--a-border-0);
+  padding-top: 12px;
+  color: var(--a-tx-1);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.aion-watch-head,
+.aion-watch-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 0.8fr;
+  gap: 12px;
+  align-items: center;
+  font-size: 12.5px;
+}
+
+.aion-watch-head {
+  padding: 0 16px 8px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-watch-row {
+  width: 100%;
+  margin-bottom: 8px;
+  color: var(--a-tx-1);
+  cursor: pointer;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.aion-watch-row:hover {
+  border-color: var(--a-border-1);
+}
+
+.aion-watch-name {
+  color: var(--a-tx-0);
+  font-weight: 500;
+}
+
+.aion-watch-sub {
+  margin-top: 2px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-search-large {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  border: 1px solid var(--a-border-0);
+  border-radius: 6px;
+  background: var(--a-bg-1);
+  padding: 10px 14px;
+}
+
+.aion-search-large input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--a-tx-0);
+  font: inherit;
+  font-size: 13px;
+}
+
+.aion-ledger-grid,
+.aion-research-grid,
+.aion-replay-state {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.aion-ledger-card {
+  cursor: pointer;
+  padding: 16px 24px;
+  transition: border-color 120ms;
+}
+
+.aion-ledger-card:hover {
+  border-color: var(--a-border-1);
+}
+
+.aion-ledger-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.aion-ledger-title h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.aion-verified {
+  color: var(--a-accent);
+  font-size: 11px;
+}
+
+.aion-ledger-kv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+  color: var(--a-tx-2);
+  font-size: 12px;
+}
+
+.aion-ledger-kv span:nth-child(even) {
+  color: var(--a-tx-0);
+}
+
+.aion-table-wrap {
+  overflow-x: auto;
+}
+
+.aion-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.aion-table th {
+  border-bottom: 1px solid var(--a-border-1);
+  color: var(--a-tx-2);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 8px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.aion-table td {
+  border-bottom: 1px solid var(--a-border-0);
+  color: var(--a-tx-1);
+  padding: 9px 10px;
+  white-space: nowrap;
+}
+
+.aion-table tbody tr:hover td {
+  background: var(--a-bg-2);
+}
+
+.aion-table td:first-child {
+  color: var(--a-tx-0);
+}
+
+.aion-table .num {
+  text-align: right;
+}
+
+.aion-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.aion-stat {
+  padding: 12px 16px;
+}
+
+.aion-stat-value {
+  color: var(--a-tx-0);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.aion-rating {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.aion-rating-number {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.aion-calibration {
+  display: block;
+  width: 100%;
+  height: 190px;
+}
+
+.aion-category-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 12.5px;
+}
+
+.aion-category-name {
+  width: 96px;
+  color: var(--a-tx-1);
+}
+
+.aion-category-bar {
+  flex: 1;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--a-bg-3);
+}
+
+.aion-category-bar i {
+  display: block;
+  height: 100%;
+  background: var(--a-accent);
+  opacity: 0.7;
+}
+
+.aion-rewind {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.aion-field label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--a-tx-2);
+  font-size: 11px;
+}
+
+.aion-field input,
+.aion-field select {
+  border: 1px solid var(--a-border-0);
+  border-radius: 6px;
+  background: var(--a-bg-1);
+  color: var(--a-tx-0);
+  font: inherit;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  padding: 7px 11px;
+}
+
+.aion-point-frame {
+  border: 1px solid var(--a-accent-line);
+  border-radius: 9px;
+  background: linear-gradient(180deg, rgba(129, 148, 255, 0.03), transparent 120px);
+  padding: 24px;
+}
+
+.aion-scrub {
+  width: 100%;
+  accent-color: var(--a-accent);
+  margin: 16px 0 8px;
+}
+
+.aion-graph {
+  position: relative;
+  height: 440px;
+  overflow: hidden;
+}
+
+.aion-graph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.aion-graph-edge {
+  fill: none;
+  stroke: var(--a-border-1);
+  stroke-width: 1;
+}
+
+.aion-graph-edge.strong {
+  stroke: var(--a-accent-line);
+  stroke-width: 1.5;
+}
+
+.aion-graph-node circle {
+  fill: var(--a-bg-3);
+  stroke: var(--a-border-1);
+}
+
+.aion-graph-node.center circle {
+  fill: var(--a-accent-dim);
+  stroke: var(--a-accent-line);
+}
+
+.aion-graph-node text {
+  fill: var(--a-tx-1);
+  font-size: 10.5px;
+}
+
+.aion-graph-node.center text {
+  fill: var(--a-tx-0);
+}
+
+.aion-overlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: rgba(8, 10, 12, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.aion-palette,
+.aion-call-modal {
+  width: min(600px, 94vw);
+  margin-top: 11vh;
+  overflow: hidden;
+  border: 1px solid var(--a-border-1);
+  border-radius: 9px;
+  background: var(--a-bg-1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+.aion-palette-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--a-border-0);
+  padding: 14px 16px;
+}
+
+.aion-palette-input input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--a-tx-0);
+  font: inherit;
+  font-size: 14px;
+}
+
+.aion-palette-body {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.aion-palette-section {
+  color: var(--a-tx-2);
+  font-size: 10.5px;
+  padding: 8px 12px 4px;
+}
+
+.aion-palette-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 11px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--a-tx-1);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.aion-palette-item:hover,
+.aion-palette-item:first-of-type {
+  background: var(--a-bg-2);
+  color: var(--a-tx-0);
+}
+
+.aion-palette-footer {
+  display: flex;
+  gap: 14px;
+  border-top: 1px solid var(--a-border-0);
+  color: var(--a-tx-2);
+  font-size: 10.5px;
+  padding: 8px 14px;
+}
+
+.aion-call-modal {
+  width: min(460px, 92vw);
+  padding: 24px 24px 16px;
+}
+
+.aion-call-modal h2 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.aion-call-sub {
+  color: var(--a-tx-2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.aion-slider-value {
+  margin: 24px 0 12px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.aion-call-modal input[type="range"] {
+  width: 100%;
+  accent-color: var(--a-accent);
+}
+
+.aion-call-modal textarea {
+  width: 100%;
+  min-height: 64px;
+  margin-top: 6px;
+  resize: vertical;
+  border: 1px solid var(--a-border-0);
+  border-radius: 6px;
+  background: var(--a-bg-0);
+  color: var(--a-tx-0);
+  font: inherit;
+  font-size: 12.5px;
+  padding: 9px 11px;
+}
+
+.aion-call-notice {
+  margin-top: 16px;
+  border: 1px solid var(--a-border-0);
+  border-radius: 6px;
+  background: var(--a-bg-0);
+  color: var(--a-tx-2);
+  font-size: 11.5px;
+  line-height: 1.5;
+  padding: 10px 12px;
+}
+
+.aion-call-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.aion-reveal {
+  margin-top: 16px;
+  border-top: 1px solid var(--a-border-0);
+  padding-top: 16px;
+}
+
+.aion-reveal-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  color: var(--a-tx-1);
+  font-size: 13px;
+}
+
+.aion-reveal-row:first-of-type {
+  color: var(--a-accent);
+}
+
+.aion-app button:focus-visible,
+.aion-app input:focus-visible,
+.aion-app textarea:focus-visible,
+.aion-app select:focus-visible {
+  outline: 1.5px solid var(--a-border-focus);
+  outline-offset: 1px;
+}
+
+@media (max-width: 1080px) {
+  .aion-event-layout,
+  .aion-relations-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .aion-inspector {
+    position: static;
+  }
+
+  .aion-research-grid,
+  .aion-ledger-grid,
+  .aion-replay-state {
+    grid-template-columns: 1fr;
+  }
+
+  .aion-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .aion-app {
+    --a-sidebar: 52px;
+  }
+
+  .aion-nav-label,
+  .aion-logo-word,
+  .aion-nav-section,
+  .aion-collapse {
+    display: none;
+  }
+
+  .aion-screen {
+    padding: 16px 16px 60px;
+  }
+
+  .aion-topbar {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .aion-crumb {
+    max-width: 34%;
+  }
+
+  .aion-ask {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .aion-card-body,
+  .aion-attribution-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aion-card-stats {
+    width: 100%;
+    margin: 7px 0 0;
+  }
+
+  .aion-card-actions {
+    overflow-x: auto;
+  }
+
+  .aion-event-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .aion-watch-head,
+  .aion-watch-row {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+
+  .aion-watch-head > :nth-child(4),
+  .aion-watch-head > :nth-child(5),
+  .aion-watch-row > :nth-child(4),
+  .aion-watch-row > :nth-child(5) {
+    display: none;
+  }
+
+  .aion-chart-bar {
+    flex-direction: column;
+  }
+
+  .aion-tabs[data-ranges="true"] {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .aion-pulse-card,
+  .aion-panel {
+    padding: 14px;
+  }
+
+  .aion-event-figures {
+    gap: 18px;
+  }
+
+  .aion-event-figure {
+    font-size: 24px;
+  }
+
+  .aion-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
