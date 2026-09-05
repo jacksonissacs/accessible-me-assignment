@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useMemo, useState } from "react"
 
 import { ScreenHead } from "@/components/common/screen-head"
@@ -97,12 +98,12 @@ export function PulseScreen() {
               ))}
             </div>
             <div className="aion-card-actions">
-              <a className="aion-button" data-quiet="true" href="/relations">
+              <Link className="aion-button" data-quiet="true" href="/relations">
                 View relationship
-              </a>
-              <a className="aion-button" data-quiet="true" href={`/events/${anomaly.id}`}>
+              </Link>
+              <Link className="aion-button" data-quiet="true" href={`/events/${anomaly.id}`}>
                 Open event
-              </a>
+              </Link>
             </div>
           </article>
         ) : null}

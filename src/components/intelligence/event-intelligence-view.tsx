@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState } from "react"
 
 import { Residual } from "@/components/common/residual"
@@ -175,10 +176,10 @@ export function EventIntelligenceView({ event }: { event: AionEvent }) {
               <p className="aion-note">No linked events in the current book.</p>
             ) : (
               related.map((item) => (
-                <a key={item.id} className="aion-related-link" href={`/events/${item.id}`}>
+                <Link key={item.id} className="aion-related-link" href={`/events/${item.id}`}>
                   <span>{item.title}</span>
                   <span className="aion-mono">{formatProbability(item.probability)}</span>
-                </a>
+                </Link>
               ))
             )}
           </div>
@@ -192,9 +193,9 @@ export function EventIntelligenceView({ event }: { event: AionEvent }) {
                   <span key={item}>Possible: {item}</span>
                 ))}
               </div>
-              <a className="aion-button" data-quiet="true" style={{ marginTop: 12 }} href="/relations">
+              <Link className="aion-button" data-quiet="true" style={{ marginTop: 12 }} href="/relations">
                 View relationship
-              </a>
+              </Link>
             </div>
           ) : null}
         </div>

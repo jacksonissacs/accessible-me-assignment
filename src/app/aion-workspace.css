@@ -303,9 +303,34 @@
 }
 
 .aion-pulse-card {
+  position: relative;
   padding: 16px 24px;
   cursor: pointer;
   transition: background 120ms, border-color 120ms;
+}
+
+.aion-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  text-decoration: none;
+}
+
+.aion-pulse-card .aion-card-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.aion-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .aion-pulse-card:hover {
@@ -1334,6 +1359,8 @@
 
 .aion-event-row-main {
   flex: 1;
+  color: inherit;
+  text-decoration: none;
 }
 
 .aion-event-row-main {

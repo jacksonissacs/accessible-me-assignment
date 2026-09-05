@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import type { MouseEvent } from "react"
 
 import { Residual } from "@/components/common/residual"
@@ -12,24 +12,18 @@ import { useWorkspace } from "@/components/layout/workspace-provider"
 import type { AionEvent } from "@/types/event"
 
 export function EventCard({ event }: { event: AionEvent }) {
-  const router = useRouter()
   const { openCall, isWatched, toggleWatch } = useWorkspace()
-
-  const openEvent = () => router.push(`/events/${event.id}`)
+  const href = `/events/${event.id}`
   const stop = (callback: () => void) => (mouseEvent: MouseEvent) => {
     mouseEvent.stopPropagation()
     callback()
   }
 
   return (
-    <article
-      className="aion-pulse-card"
-      onClick={openEvent}
-      onKeyDown={(keyboardEvent) => keyboardEvent.key === "Enter" && openEvent()}
-      role="button"
-      tabIndex={0}
-      aria-label={`Open ${event.title}`}
-    >
+    <article className="aion-pulse-card">
+      <Link className="aion-card-link" href={href} aria-label={`Open ${event.title}`}>
+        <span className="aion-sr-only">Open {event.title}</span>
+      </Link>
       <div className="aion-card-meta">
         <span className="category">{event.category}</span>
         <span className="aion-mono">{event.displayTime}</span>
@@ -74,9 +68,9 @@ export function EventCard({ event }: { event: AionEvent }) {
         </div>
       </div>
       <div className="aion-card-actions">
-        <button type="button" className="aion-button" data-quiet="true" onClick={stop(openEvent)}>
+        <Link className="aion-button" data-quiet="true" href={href} onClick={(event) => event.stopPropagation()}>
           Open event
-        </button>
+        </Link>
         <button
           type="button"
           className="aion-button"
@@ -94,9 +88,9 @@ export function EventCard({ event }: { event: AionEvent }) {
         >
           {isWatched(event.id) ? "Following" : "Follow"}
         </button>
-        <button type="button" className="aion-button" data-quiet="true" onClick={stop(openEvent)}>
+        <Link className="aion-button" data-quiet="true" href={href} onClick={(event) => event.stopPropagation()}>
           View evidence
-        </button>
+        </Link>
       </div>
     </article>
   )
